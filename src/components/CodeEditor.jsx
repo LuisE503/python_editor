@@ -4,7 +4,17 @@ import Editor from '@monaco-editor/react';
 /**
  * Componente editor de código con Monaco Editor
  */
-function CodeEditor({ value, onChange, language = 'python', readOnly = false, theme = 'vs-dark' }) {
+function CodeEditor({ 
+  value, 
+  onChange, 
+  language = 'python', 
+  readOnly = false, 
+  theme = 'vs-dark',
+  fontSize = 14,
+  wordWrap = 'on',
+  minimap = true,
+  lineNumbers = 'on'
+}) {
   const editorRef = useRef(null);
 
   function handleEditorDidMount(editor, monaco) {
@@ -78,14 +88,14 @@ function CodeEditor({ value, onChange, language = 'python', readOnly = false, th
       onMount={handleEditorDidMount}
       options={{
         readOnly,
-        minimap: { enabled: true },
-        fontSize: 14,
-        lineNumbers: 'on',
+        minimap: { enabled: minimap },
+        fontSize: fontSize,
+        lineNumbers: lineNumbers,
         roundedSelection: true,
         scrollBeyondLastLine: false,
         automaticLayout: true,
         tabSize: 4,
-        wordWrap: 'on',
+        wordWrap: wordWrap,
         suggest: {
           showKeywords: true,
           showSnippets: true,
@@ -94,7 +104,11 @@ function CodeEditor({ value, onChange, language = 'python', readOnly = false, th
           other: true,
           comments: false,
           strings: false
-        }
+        },
+        padding: { top: 10, bottom: 10 },
+        smoothScrolling: true,
+        cursorBlinking: 'smooth',
+        cursorSmoothCaretAnimation: true
       }}
     />
   );

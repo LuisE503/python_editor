@@ -41,14 +41,15 @@ body {
 
 /* Header */
 .app-header {
-  background: #2d2d30;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #fff;
-  padding: 12px 20px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  padding: 16px 24px;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.3);
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #3e3e42;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
 }
 
 .app-title {
@@ -99,21 +100,25 @@ body {
 }
 
 .toolbar button {
-  background: #0e639c;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   border: none;
-  padding: 8px 16px;
-  border-radius: 4px;
+  padding: 10px 20px;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.2s;
+  font-weight: 500;
+  transition: all 0.3s ease;
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
+  box-shadow: 0 2px 10px rgba(102, 126, 234, 0.3);
 }
 
 .toolbar button:hover:not(:disabled) {
-  background: #1177bb;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.5);
+  background: linear-gradient(135deg, #7a8ff3 0%, #8b5ab8 100%);
 }
 
 .toolbar button:disabled {

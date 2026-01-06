@@ -2,41 +2,74 @@ import React, { useState, useEffect } from 'react';
 import CodeEditor from './components/CodeEditor';
 import OutputPanel from './components/OutputPanel';
 import Toolbar from './components/Toolbar';
+import ExamplesGallery from './components/ExamplesGallery';
+import InteractiveREPL from './components/InteractiveREPL';
+import SettingsPanel from './components/SettingsPanel';
+import SharePanel from './components/SharePanel';
+import CodeAnalyzer from './components/CodeAnalyzer';
 import { initializePyodide, runPythonCode, resetPyodide, isPyodideReady } from './services/pyodide';
 import { runTests, validateTestCode } from './services/testRunner';
 import { validateCode, limitOutput } from './utils/security';
 
-const DEFAULT_CODE = `# Bienvenido a PyHub IDE
-# Escribe tu código Python aquí y presiona "Ejecutar"
+const DEFAULT_CODE = `# 🎉 Bienvenido a PyHub IDE - Tu Python Playground
+# Editor profesional con ejemplos interactivos increíbles
 
-def saludar(nombre):
-    """Función de ejemplo que saluda."""
-    return f"¡Hola, {nombre}!"
+def factorial(n):
+    """Calcula el factorial de un número."""
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
 
-# Ejecutar el código
-mensaje = saludar("Mundo")
-print(mensaje)
+# Demostración
+print("🧮 Calculadora de Factoriales")
+for i in range(1, 8):
+    print(f"  {i}! = {factorial(i):,}")
 
-# Ejemplo de cálculo
-numeros = [1, 2, 3, 4, 5]
-suma = sum(numeros)
-print(f"La suma de {numeros} es {suma}")
+# Tip: Explora los ejemplos avanzados en la galería 📚
+# - Visualización de datos con matplotlib
+# - Arte generativo y fractales
+# - Algoritmos clásicos
+# - Machine Learning desde cero
+# - Juegos interactivos
+print("\\n💡 ¡Abre la galería para ver ejemplos increíbles!")
 `;
 
 const EXAMPLES = [
   { name: 'Hola Mundo', file: 'hello_world.py' },
   { name: 'Fibonacci', file: 'fibonacci.py' },
-  { name: 'Tests Unitarios', file: 'tests_example.py' }
+  { name: 'Tests Unitarios', file: 'tests_example.py' },
+  { name: 'Visualización de Datos', file: 'data_visualization.py' },
+  { name: 'Arte y Animaciones', file: 'animations.py' },
+  { name: 'Algoritmos Clásicos', file: 'algorithms.py' },
+  { name: 'Machine Learning', file: 'machine_learning.py' },
+  { name: 'Juegos Interactivos', file: 'games.py' },
+  { name: 'Criptografía', file: 'cryptography.py' },
+  { name: 'Web Scraping y APIs', file: 'web_scraping.py' }
 ];
 
 function App() {
-  const [code, setCode] = useState(DEFAULT_CODE);
+  const [code, setCode] = useState(() => {
+    // Cargar código guardado del localStorage
+    const saved = localStorage.getItem('pyhub-code');
+    return saved || DEFAULT_CODE;
+  });
   const [output, setOutput] = useState('');
   const [testResults, setTestResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [loadingMessage, setLoadingMessage] = useState('Iniciando...');
   const [isRunning, setIsRunning] = useState(false);
   const [pyodideReady, setPyodideReady] = useState(false);
+  const [settings, setSettings] = useState(() => {
+    const saved = localStorage.getItem('pyhub-settings');
+    return saved ? JSON.parse(saved) : {
+      theme: 'vs-dark',
+      fontSize: 14,
+      wordWrap: 'on',
+      minimap: true,
+      lineNumbers: 'on',
+      autoSave: true
+    };
+  });
 
   // Inicializar Pyodide al montar el componente
   useEffect(() => {
@@ -46,7 +79,7 @@ function App() {
           setLoadingMessage(message);
         });
         setPyodideReady(true);
-        setOutput('✓ Python listo. ¡Comienza a programar!\n');
+        setOutput('✨ Python listo. ¡Explora los ejemplos en la galería! 📚\n');
       } catch (error) {
         setOutput(`❌ Error al inicializar Pyodide:\n${error.message}\n\nRecarga la página para intentar de nuevo.`);
       } finally {
@@ -56,6 +89,21 @@ function App() {
     
     init();
   }, []);
+
+  // Auto-guardar código
+  useEffect(() => {
+    if (settings.autoSave) {
+      const timer = setTimeout(() => {
+        localStorage.setItem('pyhub-code', code);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [code, settings.autoSave]);
+
+  // Guardar configuración
+  useEffect(() => {
+    localStorage.setItem('pyhub-settings', JSON.stringify(settings));
+  }, [settings]);
 
   // Listener para el atajo Ctrl+Enter
   useEffect(() => {
@@ -180,7 +228,7 @@ function App() {
       if (response.ok) {
         const exampleCode = await response.text();
         setCode(exampleCode);
-        setOutput(`📚 Ejemplo cargado: ${filename}\n`);
+        setOutput(`📚 Ejemplo cargado: ${filename}\n✨ Presiona Ejecutar o Ctrl+Enter para ver el resultado\n`);
         setTestResults(null);
       } else {
         setOutput(`❌ No se pudo cargar el ejemplo: ${filename}\n`);
@@ -193,6 +241,24 @@ function App() {
   const handleClearOutput = () => {
     setOutput('');
     setTestResults(null);
+  };
+
+  const handleSettingsChange = (newSettings) => {
+    setSettings(newSettings);
+  };
+
+  const handleLoadSharedCode = (sharedCode) => {
+    setCode(sharedCode);
+    setOutput('📥 Código compartido cargado correctamente\n');
+  };
+
+  const executeREPLCode = async (replCode) => {
+    try {
+      const result = await runPythonCode(replCode, 10000);
+      return result;
+    } catch (error) {
+      return { success: false, error: error.message };
+    }
   };
 
   return (
@@ -209,11 +275,19 @@ function App() {
       <header className="app-header">
         <div className="app-title">
           <span className="icon">🐍</span>
-          <span>PyHub IDE</span>
+          <span className="font-bold text-xl">PyHub IDE</span>
+          <span className="ml-2 text-xs bg-purple-600 px-2 py-1 rounded-full">Pro</span>
         </div>
-        <div className="app-status">
-          <span className={`status-indicator ${isLoading ? 'loading' : ''}`}></span>
-          <span>{pyodideReady ? 'Python listo' : 'Cargando...'}</span>
+        <div className="flex items-center gap-3">
+          <ExamplesGallery onLoadExample={handleLoadExample} isRunning={isRunning} />
+          <InteractiveREPL pyodideReady={pyodideReady} onExecuteCode={executeREPLCode} />
+          <CodeAnalyzer code={code} />
+          <SharePanel code={code} onLoadCode={handleLoadSharedCode} />
+          <SettingsPanel settings={settings} onSettingsChange={handleSettingsChange} />
+          <div className="app-status ml-3">
+            <span className={`status-indicator ${isLoading ? 'loading' : ''}`}></span>
+            <span className="text-sm">{pyodideReady ? '🟢 Python listo' : '🟡 Cargando...'}</span>
+          </div>
         </div>
       </header>
 
@@ -231,18 +305,31 @@ function App() {
         <div className="editor-panel">
           <div className="editor-header">
             <div className="editor-tabs">
-              <button className="editor-tab active">main.py</button>
+              <button className="editor-tab active">
+                <span>📄</span>
+                <span>main.py</span>
+              </button>
             </div>
-            <span style={{ fontSize: '11px', color: '#888' }}>
-              Ctrl+Enter para ejecutar
-            </span>
+            <div className="flex items-center gap-3 text-xs text-gray-400">
+              {settings.autoSave && <span className="flex items-center gap-1">
+                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
+                </svg>
+                Auto-guardado
+              </span>}
+              <span>Ctrl+Enter para ejecutar</span>
+            </div>
           </div>
           <div className="editor-wrapper">
             <CodeEditor
               value={code}
               onChange={setCode}
               language="python"
-              theme="vs-dark"
+              theme={settings.theme}
+              fontSize={settings.fontSize}
+              wordWrap={settings.wordWrap}
+              minimap={settings.minimap}
+              lineNumbers={settings.lineNumbers}
             />
           </div>
         </div>

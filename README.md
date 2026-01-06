@@ -1,103 +1,153 @@
-# PyHub IDE 🐍
+# PyHub IDE 🐍✨
 
-**Web-IDE profesional para ejecutar Python en el navegador - JavaScript Puro + Tailwind CSS**
+**El IDE de Python más avanzado para navegadores - React + Pyodide + Monaco Editor**
 
-PyHub IDE es un entorno de desarrollo integrado que se ejecuta completamente en el navegador, permitiendo escribir, ejecutar y testear código Python sin instalación. Utiliza **JavaScript vanilla**, **Tailwind CSS**, **Pyodide** y **Monaco Editor** para una experiencia premium y ultra-rápida.
+PyHub IDE es un entorno de desarrollo integrado profesional que se ejecuta completamente en el navegador, permitiendo escribir, ejecutar y visualizar código Python sin instalación. Con soporte para visualización de datos, machine learning, animaciones y mucho más.
 
-## ✨ Características Premium
+## 🌟 Características Extraordinarias
 
-✅ **JavaScript Vanilla** ultrarrápido y liviano  
-✅ **Tailwind CSS** para UI profesional y responsive  
-✅ **Monaco Editor** con tema personalizado y autocompletado  
-✅ **Pyodide** con carga lazy y manejo de errores  
-✅ **Test Runner** avanzado (funciones simples + unittest)  
-✅ **Seguridad**: validación, timeouts, sanitización  
-✅ **Live Server** compatible - sin build steps  
-✅ **3 ejemplos** interactivos listos para usar  
-✅ **UI premium** con efectos glassmorphism y gradientes  
-✅ **Responsive** perfecto para móvil y desktop
+### 🎨 **Editor Profesional**
+✅ **Monaco Editor** - El mismo editor de VS Code  
+✅ **Temas personalizables** - Dark, Light, High Contrast, Monokai  
+✅ **Autocompletado inteligente** - Snippets y sugerencias  
+✅ **Ajuste de fuente** - Personaliza tamaño, números de línea y más  
+✅ **Auto-guardado** - Tu código se guarda automáticamente
+
+### 📊 **Visualización de Datos**
+✅ **Matplotlib integrado** - Gráficos profesionales en el navegador  
+✅ **NumPy incluido** - Computación científica  
+✅ **Múltiples tipos de gráficos** - Líneas, barras, dispersión, circular  
+✅ **Arte generativo** - Fractales, espirales de Fibonacci y más
+
+### 💻 **Terminal REPL Interactivo**
+✅ **REPL en tiempo real** - Ejecuta comandos Python línea por línea  
+✅ **Historial de comandos** - Navega con ↑/↓  
+✅ **Autocompletado** - Sugerencias contextuales  
+✅ **Comandos especiales** - clear, help, history
+
+### 📚 **Galería de Ejemplos**
+✅ **8 ejemplos profesionales** categorizados:
+- 🌱 **Básicos**: Hola Mundo, Fibonacci, Tests
+- 📊 **Data Science**: Visualización con matplotlib
+- 🎨 **Visual**: Arte generativo y fractales
+- 🧮 **Algoritmos**: Ordenamiento, búsqueda, Dijkstra, Hanoi
+- 🤖 **Machine Learning**: Regresión, clustering, redes neuronales
+- 🎮 **Juegos**: Game of Life, Sudoku, laberintos, Tic-Tac-Toe
+- 🧪 **Testing**: Unittest y TDD
+
+### 🔗 **Compartir y Colaborar**
+✅ **Compartir por URL** - Código codificado en el enlace  
+✅ **Descargar archivos** - Exporta a .py  
+✅ **Estadísticas** - Líneas, caracteres, tamaño  
+✅ **Redes sociales** - Comparte en Twitter y LinkedIn
+
+### ⚙️ **Personalización Total**
+✅ **Panel de configuración** - Ajusta todo a tu gusto  
+✅ **Temas del editor** - 4 temas profesionales  
+✅ **Tamaño de fuente** - 10px a 24px  
+✅ **Word wrap** - Ajuste automático de líneas  
+✅ **Minimapa** - Navegación visual del código  
+✅ **Auto-save** - Guardado automático en localStorage
+
+### 🧪 **Testing Integrado**
+✅ **Unittest framework** - Tests unitarios completos  
+✅ **Resultados visuales** - Interfaz clara de resultados  
+✅ **Cobertura de tests** - Estadísticas detalladas
+
+### 🔒 **Seguridad**
+✅ **Validación de código** - Previene código malicioso  
+✅ **Timeouts** - Protección contra loops infinitos  
+✅ **Sandboxing** - Ejecución aislada  
+✅ **Sanitización** - Limpieza de salidas
 
 ## 🛠️ Tecnologías
 
-- **JavaScript Vanilla** - Sin frameworks, máximo rendimiento
+- **React 18.3** - Biblioteca UI moderna y eficiente
+- **Vite 5.4** - Build tool ultrarrápido
+- **Monaco Editor** - Editor de código profesional (VS Code)
+- **Pyodide 0.26** - Python 3.11 en WebAssembly
+- **Matplotlib** - Visualización de datos científicos
+- **NumPy** - Computación numérica
 - **Tailwind CSS** - Framework CSS utilitario
-- **Pyodide** - Python en WebAssembly
-- **Monaco Editor** - Editor de código (VS Code)
-- **Live Server** - Desarrollo local sin build
 
-## 📦 Instalación y Desarrollo
+## 🚀 Inicio Rápido
 
 ### Requisitos Previos
 
+- Node.js 18+ y npm/yarn
 - Navegador moderno (Chrome, Firefox, Safari, Edge)
-- Extensión Live Server para VS Code (recomendado)
 - Git (opcional)
 
-### Instalación Súper Simple
-
-1. **Descargar archivos**
-   ```bash
-   git clone https://github.com/tu-usuario/pyhub-ide.git
-   cd pyhub-ide
-   ```
-
-2. **Abrir con Live Server**
-   - Abre `index.html` en VS Code
-   - Click derecho → "Open with Live Server"
-   - ¡Listo! El IDE se abrirá automáticamente
-
-### Alternativa Sin VS Code
+### Instalación
 
 ```bash
-# Con Python 3
-python -m http.server 8000
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/pyhub-ide.git
+cd pyhub-ide
 
-# Con Node.js
-npx serve .
+# 2. Instalar dependencias
+npm install
 
-# Luego abre: http://localhost:8000
+# 3. Iniciar servidor de desarrollo
+npm run dev
 ```
 
-**✨ Sin instalaciones complejas, sin build steps, sin configuraciones.**
+Abre tu navegador en `http://localhost:5173` - ¡El IDE estará listo! 🎉
 
-## 🚀 Desplegar en GitHub Pages
+### Build para Producción
 
-### Súper Fácil - Sin Build
-
-1. **Subir a GitHub**
-   ```bash
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git remote add origin https://github.com/tu-usuario/pyhub-ide.git
-   git push -u origin main
-   ```
-
-2. **Configurar GitHub Pages**
-   - Ve a Settings → Pages en tu repositorio
-   - Source: Deploy from a branch
-   - Branch: `main` / `root`
-   - Guarda los cambios
-
-3. **¡Listo!** Tu IDE estará en:
-   `https://tu-usuario.github.io/pyhub-ide/`
-
-### Actualizaciones
-
-Solo haz push a main:
 ```bash
-git add .
-git commit -m "Update"
-git push
+# Compilar para producción
+npm run build
+
+# Vista previa del build
+npm run preview
 ```
 
-**Sin npm, sin build, sin complicaciones.**
+## 🎯 Uso
 
-## 📚 Uso
+### Editor de Código
+- Escribe tu código Python en el editor Monaco
+- **Ctrl+Enter** o clic en "Ejecutar" para correr el código
+- El output aparece en el panel derecho
+- Soporte completo de sintaxis y autocompletado
 
-### Escribir y Ejecutar Código
+### Terminal REPL
+- Haz clic en "💻 Terminal" para abrir el REPL
+- Escribe comandos Python interactivos
+- Usa ↑/↓ para navegar el historial
+- **Ctrl+L** para limpiar la terminal
 
-1. Escribe tu código Python en el editor
+### Galería de Ejemplos
+- Haz clic en "📚 Ejemplos"
+- Explora 8 categorías con ejemplos profesionales
+- Busca por nombre o descripción
+- Carga cualquier ejemplo con un clic
+
+### Visualización de Datos
+```python
+import matplotlib.pyplot as plt
+import numpy as np
+
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+
+plt.plot(x, y)
+plt.title('Función Seno')
+plt.show()
+```
+
+### Compartir Código
+- Clic en "🔗 Compartir"
+- Genera URL con código incluido
+- Descarga como archivo .py
+- Comparte en redes sociales
+
+### Personalización
+- Clic en "⚙️ Ajustes"
+- Cambia tema, fuente, y más
+- Auto-guardado opcional
+- Configuración persistente
 2. Haz clic en **"▶️ Ejecutar"** o presiona `Ctrl+Enter`
 3. La salida aparecerá en el panel derecho
 

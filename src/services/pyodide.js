@@ -91,6 +91,29 @@ _stderr_capture = OutputCapture()
 sys.stdout = _stdout_capture
 sys.stderr = _stderr_capture
       `);
+
+      // Cargar matplotlib si está disponible
+      if (onProgress) onProgress('Cargando librerías de visualización...');
+      try {
+        await pyodideInstance.loadPackage(['matplotlib', 'numpy']);
+        
+        // Configurar matplotlib para mostrar gráficos en el navegador
+        await pyodideInstance.runPythonAsync(`
+import matplotlib
+import matplotlib.pyplot as plt
+import numpy as np
+
+# Configurar backend para navegador
+matplotlib.use('module://matplotlib_pyodide.html5_canvas_backend')
+
+# Configurar para mostrar múltiples gráficos
+plt.ioff()  # Desactivar modo interactivo
+
+print("✅ Matplotlib y NumPy cargados correctamente")
+        `);
+      } catch (error) {
+        console.warn('matplotlib no disponible:', error);
+      }
       
       if (onProgress) onProgress('¡Pyodide listo!');
       
