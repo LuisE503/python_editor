@@ -1,15 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import CodeEditor from './components/CodeEditor';
-import OutputPanel from './components/OutputPanel';
-import Toolbar from './components/Toolbar';
-import ExamplesGallery from './components/ExamplesGallery';
-import InteractiveREPL from './components/InteractiveREPL';
-import SettingsPanel from './components/SettingsPanel';
-import SharePanel from './components/SharePanel';
-import CodeAnalyzer from './components/CodeAnalyzer';
-import { initializePyodide, runPythonCode, resetPyodide, isPyodideReady } from './services/pyodide';
-import { runTests, validateTestCode } from './services/testRunner';
-import { validateCode, limitOutput } from './utils/security';
+import React, { useState, useEffect, useRef } from "react";
+import CodeEditor from "./components/CodeEditor";
+import OutputPanel from "./components/OutputPanel";
+import Toolbar from "./components/Toolbar";
+import ExamplesGallery from "./components/ExamplesGallery";
+import InteractiveREPL from "./components/InteractiveREPL";
+import SettingsPanel from "./components/SettingsPanel";
+import SharePanel from "./components/SharePanel";
+import CodeAnalyzer from "./components/CodeAnalyzer";
+import ToastContainer from "./components/ToastContainer";
+import CommandPalette from "./components/CommandPalette";
+import SnippetsLibrary from "./components/SnippetsLibrary";
+import HelpPanel from "./components/HelpPanel";
+import StatusBar from "./components/StatusBar";
+import KeyboardShortcutsOverlay from "./components/KeyboardShortcutsOverlay";
+import {
+  initializePyodide,
+  runPythonCode,
+  resetPyodide,
+  isPyodideReady,
+} from "./services/pyodide";
+import { runTests, validateTestCode } from "./services/testRunner";
+import { validateCode, limitOutput } from "./utils/security";
 
 const DEFAULT_CODE = `# 🎉 Bienvenido a PyHub IDE - Tu Python Playground
 # Editor profesional con ejemplos interactivos increíbles
@@ -35,40 +46,43 @@ print("\\n💡 ¡Abre la galería para ver ejemplos increíbles!")
 `;
 
 const EXAMPLES = [
-  { name: 'Hola Mundo', file: 'hello_world.py' },
-  { name: 'Fibonacci', file: 'fibonacci.py' },
-  { name: 'Tests Unitarios', file: 'tests_example.py' },
-  { name: 'Visualización de Datos', file: 'data_visualization.py' },
-  { name: 'Arte y Animaciones', file: 'animations.py' },
-  { name: 'Algoritmos Clásicos', file: 'algorithms.py' },
-  { name: 'Machine Learning', file: 'machine_learning.py' },
-  { name: 'Juegos Interactivos', file: 'games.py' },
-  { name: 'Criptografía', file: 'cryptography.py' },
-  { name: 'Web Scraping y APIs', file: 'web_scraping.py' }
+  { name: "Hola Mundo", file: "hello_world.py" },
+  { name: "Fibonacci", file: "fibonacci.py" },
+  { name: "Tests Unitarios", file: "tests_example.py" },
+  { name: "Visualización de Datos", file: "data_visualization.py" },
+  { name: "Arte y Animaciones", file: "animations.py" },
+  { name: "Algoritmos Clásicos", file: "algorithms.py" },
+  { name: "Machine Learning", file: "machine_learning.py" },
+  { name: "Juegos Interactivos", file: "games.py" },
+  { name: "Criptografía", file: "cryptography.py" },
+  { name: "Web Scraping y APIs", file: "web_scraping.py" },
 ];
 
 function App() {
   const [code, setCode] = useState(() => {
     // Cargar código guardado del localStorage
-    const saved = localStorage.getItem('pyhub-code');
+    const saved = localStorage.getItem("pyhub-code");
     return saved || DEFAULT_CODE;
   });
-  const [output, setOutput] = useState('');
+  const [output, setOutput] = useState("");
   const [testResults, setTestResults] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [loadingMessage, setLoadingMessage] = useState('Iniciando...');
+  const [loadingMessage, setLoadingMessage] = useState("Iniciando...");
   const [isRunning, setIsRunning] = useState(false);
   const [pyodideReady, setPyodideReady] = useState(false);
+  const [executionTime, setExecutionTime] = useState(null);
   const [settings, setSettings] = useState(() => {
-    const saved = localStorage.getItem('pyhub-settings');
-    return saved ? JSON.parse(saved) : {
-      theme: 'vs-dark',
-      fontSize: 14,
-      wordWrap: 'on',
-      minimap: true,
-      lineNumbers: 'on',
-      autoSave: true
-    };
+    const saved = localStorage.getItem("pyhub-settings");
+    return saved
+      ? JSON.parse(saved)
+      : {
+          theme: "vs-dark",
+          fontSize: 14,
+          wordWrap: "on",
+          minimap: true,
+          lineNumbers: "on",
+          autoSave: true,
+        };
   });
 
   // Inicializar Pyodide al montar el componente
@@ -79,14 +93,16 @@ function App() {
           setLoadingMessage(message);
         });
         setPyodideReady(true);
-        setOutput('✨ Python listo. ¡Explora los ejemplos en la galería! 📚\n');
+        setOutput("✨ Python listo. ¡Explora los ejemplos en la galería! 📚\n");
       } catch (error) {
-        setOutput(`❌ Error al inicializar Pyodide:\n${error.message}\n\nRecarga la página para intentar de nuevo.`);
+        setOutput(
+          `❌ Error al inicializar Pyodide:\n${error.message}\n\nRecarga la página para intentar de nuevo.`
+        );
       } finally {
         setIsLoading(false);
       }
     }
-    
+
     init();
   }, []);
 
@@ -94,7 +110,7 @@ function App() {
   useEffect(() => {
     if (settings.autoSave) {
       const timer = setTimeout(() => {
-        localStorage.setItem('pyhub-code', code);
+        localStorage.setItem("pyhub-code", code);
       }, 1000);
       return () => clearTimeout(timer);
     }
@@ -102,7 +118,7 @@ function App() {
 
   // Guardar configuración
   useEffect(() => {
-    localStorage.setItem('pyhub-settings', JSON.stringify(settings));
+    localStorage.setItem("pyhub-settings", JSON.stringify(settings));
   }, [settings]);
 
   // Listener para el atajo Ctrl+Enter
@@ -113,46 +129,61 @@ function App() {
       }
     };
 
-    window.addEventListener('editor-run', handleEditorRun);
-    return () => window.removeEventListener('editor-run', handleEditorRun);
+    window.addEventListener("editor-run", handleEditorRun);
+    return () => window.removeEventListener("editor-run", handleEditorRun);
   }, [pyodideReady, isRunning, code]);
 
   const handleRun = async () => {
     if (!isPyodideReady()) {
-      setOutput('⚠️ Pyodide aún no está listo. Por favor espera...\n');
+      setOutput("⚠️ Pyodide aún no está listo. Por favor espera...\n");
       return;
     }
 
     setIsRunning(true);
     setTestResults(null);
-    setOutput('🔄 Ejecutando...\n');
+    setOutput("🔄 Ejecutando...\n");
+
+    const startTime = performance.now();
 
     try {
       // Validar código
       const validation = validateCode(code);
       if (!validation.valid) {
-        setOutput('❌ Errores de validación:\n' + validation.errors.join('\n'));
+        setOutput("❌ Errores de validación:\n" + validation.errors.join("\n"));
+        setExecutionTime(null);
         return;
       }
 
       if (validation.warnings.length > 0) {
-        setOutput('⚠️ Advertencias:\n' + validation.warnings.join('\n') + '\n\n');
+        setOutput(
+          "⚠️ Advertencias:\n" + validation.warnings.join("\n") + "\n\n"
+        );
       }
 
       // Ejecutar código
       const result = await runPythonCode(code, 30000);
-      
+      const endTime = performance.now();
+      const execTime = Math.round(endTime - startTime);
+      setExecutionTime(execTime);
+
       if (result.success) {
-        let outputText = result.output || '';
-        if (result.result !== undefined && result.result !== null && result.result !== 'None') {
+        let outputText = result.output || "";
+        if (
+          result.result !== undefined &&
+          result.result !== null &&
+          result.result !== "None"
+        ) {
           outputText += `\n\n➜ Resultado: ${result.result}`;
         }
-        setOutput(outputText || '✓ Código ejecutado correctamente (sin salida)');
+        setOutput(
+          outputText || "✓ Código ejecutado correctamente (sin salida)"
+        );
       } else {
         setOutput(`❌ Error:\n${result.error || result.output}`);
       }
     } catch (error) {
       setOutput(`❌ Error inesperado:\n${error.message}`);
+      setExecutionTime(null);
     } finally {
       setIsRunning(false);
     }
@@ -160,39 +191,46 @@ function App() {
 
   const handleRunTests = async () => {
     if (!isPyodideReady()) {
-      setOutput('⚠️ Pyodide aún no está listo. Por favor espera...\n');
+      setOutput("⚠️ Pyodide aún no está listo. Por favor espera...\n");
       return;
     }
 
     setIsRunning(true);
     setTestResults(null);
-    setOutput('🧪 Ejecutando tests...\n');
+    setOutput("🧪 Ejecutando tests...\n");
 
     try {
       // Validar código de tests
       const validation = validateTestCode(code);
       if (!validation.valid) {
-        setOutput('❌ No se encontraron tests válidos:\n' + validation.errors.join('\n'));
+        setOutput(
+          "❌ No se encontraron tests válidos:\n" + validation.errors.join("\n")
+        );
         return;
       }
 
       // Ejecutar tests
       const result = await runTests(code, 30000);
-      
+
       if (result.success) {
         setTestResults(result.results);
-        const passRate = result.results.total > 0 
-          ? ((result.results.passed / result.results.total) * 100).toFixed(1)
-          : 0;
+        const passRate =
+          result.results.total > 0
+            ? ((result.results.passed / result.results.total) * 100).toFixed(1)
+            : 0;
         setOutput(
           `✓ Tests completados\n` +
-          `Total: ${result.results.total}\n` +
-          `Pasados: ${result.results.passed}\n` +
-          `Fallados: ${result.results.failed}\n` +
-          `Tasa de éxito: ${passRate}%\n`
+            `Total: ${result.results.total}\n` +
+            `Pasados: ${result.results.passed}\n` +
+            `Fallados: ${result.results.failed}\n` +
+            `Tasa de éxito: ${passRate}%\n`
         );
       } else {
-        setOutput(`❌ Error al ejecutar tests:\n${result.error}\n\n${result.output || ''}`);
+        setOutput(
+          `❌ Error al ejecutar tests:\n${result.error}\n\n${
+            result.output || ""
+          }`
+        );
       }
     } catch (error) {
       setOutput(`❌ Error inesperado:\n${error.message}`);
@@ -203,13 +241,13 @@ function App() {
 
   const handleReset = async () => {
     setIsRunning(true);
-    setOutput('🔄 Reiniciando entorno...\n');
+    setOutput("🔄 Reiniciando entorno...\n");
     setTestResults(null);
 
     try {
       const result = await resetPyodide();
       if (result.success) {
-        setOutput('✓ Entorno reiniciado correctamente\n');
+        setOutput("✓ Entorno reiniciado correctamente\n");
       } else {
         setOutput(`⚠️ ${result.error}\n`);
       }
@@ -228,7 +266,9 @@ function App() {
       if (response.ok) {
         const exampleCode = await response.text();
         setCode(exampleCode);
-        setOutput(`📚 Ejemplo cargado: ${filename}\n✨ Presiona Ejecutar o Ctrl+Enter para ver el resultado\n`);
+        setOutput(
+          `📚 Ejemplo cargado: ${filename}\n✨ Presiona Ejecutar o Ctrl+Enter para ver el resultado\n`
+        );
         setTestResults(null);
       } else {
         setOutput(`❌ No se pudo cargar el ejemplo: ${filename}\n`);
@@ -239,7 +279,7 @@ function App() {
   };
 
   const handleClearOutput = () => {
-    setOutput('');
+    setOutput("");
     setTestResults(null);
   };
 
@@ -249,7 +289,10 @@ function App() {
 
   const handleLoadSharedCode = (sharedCode) => {
     setCode(sharedCode);
-    setOutput('📥 Código compartido cargado correctamente\n');
+    setOutput("📥 Código compartido cargado correctamente\n");
+    if (window.showToast) {
+      window.showToast("Código cargado exitosamente", "success");
+    }
   };
 
   const executeREPLCode = async (replCode) => {
@@ -261,8 +304,39 @@ function App() {
     }
   };
 
+  const handleInsertSnippet = (snippetCode) => {
+    // Insertar snippet al final del código actual
+    setCode((prevCode) => {
+      if (prevCode.trim()) {
+        return prevCode + "\n\n" + snippetCode;
+      }
+      return snippetCode;
+    });
+  };
+
+  // Refs para los componentes
+  const examplesGalleryRef = useRef(null);
+  const replRef = useRef(null);
+  const settingsRef = useRef(null);
+  const shareRef = useRef(null);
+  const analyzerRef = useRef(null);
+  const snippetsRef = useRef(null);
+
   return (
     <div className="app-container">
+      <ToastContainer />
+
+      <CommandPalette
+        onRunCode={handleRun}
+        onRunTests={handleRunTests}
+        onOpenExamples={() => {}}
+        onOpenREPL={() => {}}
+        onOpenSettings={() => {}}
+        onOpenShare={() => {}}
+        onOpenAnalyzer={() => {}}
+        onClearOutput={handleClearOutput}
+      />
+
       {isLoading && (
         <div className="loading-overlay">
           <div className="loading-content">
@@ -272,21 +346,48 @@ function App() {
         </div>
       )}
 
-      <header className="app-header">
+      <header className="app-header" role="banner">
         <div className="app-title">
-          <span className="icon">🐍</span>
-          <span className="font-bold text-xl">PyHub IDE</span>
-          <span className="ml-2 text-xs bg-purple-600 px-2 py-1 rounded-full">Pro</span>
+          <span className="icon" aria-hidden="true">
+            🐍
+          </span>
+          <h1 className="font-bold text-xl">PyHub IDE</h1>
+          <span
+            className="ml-2 text-xs bg-purple-600 px-2 py-1 rounded-full"
+            aria-label="Pro version"
+          >
+            Pro
+          </span>
         </div>
-        <div className="flex items-center gap-3">
-          <ExamplesGallery onLoadExample={handleLoadExample} isRunning={isRunning} />
-          <InteractiveREPL pyodideReady={pyodideReady} onExecuteCode={executeREPLCode} />
+        <div
+          className="flex items-center gap-2 flex-wrap"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <ExamplesGallery
+            onLoadExample={handleLoadExample}
+            isRunning={isRunning}
+          />
+          <SnippetsLibrary onInsertSnippet={handleInsertSnippet} />
+          <InteractiveREPL
+            pyodideReady={pyodideReady}
+            onExecuteCode={executeREPLCode}
+          />
           <CodeAnalyzer code={code} />
           <SharePanel code={code} onLoadCode={handleLoadSharedCode} />
-          <SettingsPanel settings={settings} onSettingsChange={handleSettingsChange} />
-          <div className="app-status ml-3">
-            <span className={`status-indicator ${isLoading ? 'loading' : ''}`}></span>
-            <span className="text-sm">{pyodideReady ? '🟢 Python listo' : '🟡 Cargando...'}</span>
+          <SettingsPanel
+            settings={settings}
+            onSettingsChange={handleSettingsChange}
+          />
+          <HelpPanel />
+          <div className="app-status ml-2" role="status" aria-live="polite">
+            <span
+              className={`status-indicator ${isLoading ? "loading" : ""}`}
+              aria-hidden="true"
+            ></span>
+            <span className="text-sm hidden md:inline">
+              {pyodideReady ? "🟢 Python listo" : "🟡 Cargando..."}
+            </span>
           </div>
         </div>
       </header>
@@ -311,12 +412,18 @@ function App() {
               </button>
             </div>
             <div className="flex items-center gap-3 text-xs text-gray-400">
-              {settings.autoSave && <span className="flex items-center gap-1">
-                <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                  <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
-                </svg>
-                Auto-guardado
-              </span>}
+              {settings.autoSave && (
+                <span className="flex items-center gap-1">
+                  <svg
+                    className="w-3 h-3"
+                    fill="currentColor"
+                    viewBox="0 0 20 20"
+                  >
+                    <path d="M7.707 10.293a1 1 0 10-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L11 11.586V6h5a2 2 0 012 2v7a2 2 0 01-2 2H4a2 2 0 01-2-2V8a2 2 0 012-2h5v5.586l-1.293-1.293zM9 4a1 1 0 012 0v2H9V4z" />
+                  </svg>
+                  Auto-guardado
+                </span>
+              )}
               <span>Ctrl+Enter para ejecutar</span>
             </div>
           </div>
@@ -340,6 +447,15 @@ function App() {
           onClear={handleClearOutput}
         />
       </div>
+
+      <StatusBar
+        code={code}
+        pyodideReady={pyodideReady}
+        isRunning={isRunning}
+        executionTime={executionTime}
+      />
+
+      <KeyboardShortcutsOverlay />
     </div>
   );
 }

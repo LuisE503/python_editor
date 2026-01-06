@@ -7,64 +7,131 @@ PyHub IDE es un entorno de desarrollo integrado profesional que se ejecuta compl
 ## 🌟 Características Extraordinarias
 
 ### 🎨 **Editor Profesional**
-✅ **Monaco Editor** - El mismo editor de VS Code  
-✅ **Temas personalizables** - Dark, Light, High Contrast, Monokai  
-✅ **Autocompletado inteligente** - Snippets y sugerencias  
-✅ **Ajuste de fuente** - Personaliza tamaño, números de línea y más  
+
+✅ **Monaco Editor** - El mismo editor de VS Code
+✅ **Temas personalizables** - Dark, Light, High Contrast, Monokai
+✅ **Autocompletado inteligente** - Snippets y sugerencias
+✅ **Ajuste de fuente** - Personaliza tamaño, números de línea y más
 ✅ **Auto-guardado** - Tu código se guarda automáticamente
+✅ **Barra de estado** - Estadísticas en tiempo real
 
 ### 📊 **Visualización de Datos**
-✅ **Matplotlib integrado** - Gráficos profesionales en el navegador  
-✅ **NumPy incluido** - Computación científica  
-✅ **Múltiples tipos de gráficos** - Líneas, barras, dispersión, circular  
+
+✅ **Matplotlib integrado** - Gráficos profesionales en el navegador
+✅ **NumPy incluido** - Computación científica
+✅ **Múltiples tipos de gráficos** - Líneas, barras, dispersión, circular
 ✅ **Arte generativo** - Fractales, espirales de Fibonacci y más
 
 ### 💻 **Terminal REPL Interactivo**
-✅ **REPL en tiempo real** - Ejecuta comandos Python línea por línea  
-✅ **Historial de comandos** - Navega con ↑/↓  
-✅ **Autocompletado** - Sugerencias contextuales  
+
+✅ **REPL en tiempo real** - Ejecuta comandos Python línea por línea
+✅ **Historial de comandos** - Navega con ↑/↓
+✅ **Autocompletado** - Sugerencias contextuales
 ✅ **Comandos especiales** - clear, help, history
 
 ### 📚 **Galería de Ejemplos**
-✅ **8 ejemplos profesionales** categorizados:
+
+✅ **12 ejemplos profesionales** categorizados:
+
 - 🌱 **Básicos**: Hola Mundo, Fibonacci, Tests
 - 📊 **Data Science**: Visualización con matplotlib
 - 🎨 **Visual**: Arte generativo y fractales
-- 🧮 **Algoritmos**: Ordenamiento, búsqueda, Dijkstra, Hanoi
+- 🧮 **Algoritmos**: Ordenamiento, búsqueda, Dijkstra, Hanoi, Estructuras avanzadas
 - 🤖 **Machine Learning**: Regresión, clustering, redes neuronales
 - 🎮 **Juegos**: Game of Life, Sudoku, laberintos, Tic-Tac-Toe
-- 🧪 **Testing**: Unittest y TDD
+- 🔐 **Seguridad**: Criptografía y hashing
+- 🌐 **Web**: Scraping, APIs y automatización
+
+### ⌨️ **Paleta de Comandos**
+
+✅ **Ctrl+K** - Acceso rápido a todas las funciones
+✅ **Búsqueda instantánea** - Encuentra comandos al instante
+✅ **Categorizado** - Ejecución, navegación, herramientas, preferencias
+✅ **Navegación por teclado** - 100% accesible
+
+### 📝 **Biblioteca de Snippets**
+
+✅ **12+ plantillas** - Código listo para usar
+✅ **Categorías** - Básico, visualización, algoritmos, estructuras, testing, avanzado
+✅ **Búsqueda rápida** - Encuentra el snippet perfecto
+✅ **Inserción directa** - Un click para agregar al editor
+
+### 📊 **Análisis de Código**
+
+✅ **Métricas en tiempo real** - Líneas, funciones, clases
+✅ **Complejidad ciclomática** - Análisis de complejidad
+✅ **Detección de estructuras** - Funciones, clases, imports
+✅ **Estadísticas visuales** - Gráficos y métricas
 
 ### 🔗 **Compartir y Colaborar**
-✅ **Compartir por URL** - Código codificado en el enlace  
-✅ **Descargar archivos** - Exporta a .py  
-✅ **Estadísticas** - Líneas, caracteres, tamaño  
+
+✅ **Compartir por URL** - Código codificado en el enlace
+✅ **Descargar archivos** - Exporta a .py
+✅ **Estadísticas** - Líneas, caracteres, tamaño
 ✅ **Redes sociales** - Comparte en Twitter y LinkedIn
 
 ### ⚙️ **Personalización Total**
-✅ **Panel de configuración** - Ajusta todo a tu gusto  
-✅ **Temas del editor** - 4 temas profesionales  
-✅ **Tamaño de fuente** - 10px a 24px  
-✅ **Word wrap** - Ajuste automático de líneas  
-✅ **Minimapa** - Navegación visual del código  
+
+✅ **Panel de configuración** - Ajusta todo a tu gusto
+✅ **Temas del editor** - 4 temas profesionales
+✅ **Tamaño de fuente** - 10px a 24px
+✅ **Word wrap** - Ajuste automático de líneas
+✅ **Minimapa** - Navegación visual del código
 ✅ **Auto-save** - Guardado automático en localStorage
 
+### 🔔 **Sistema de Notificaciones**
+
+✅ **Toast notifications** - Feedback visual instantáneo
+✅ **4 tipos** - Success, error, warning, info
+✅ **Auto-dismiss** - Desaparecen automáticamente
+✅ **No intrusivo** - Posicionamiento optimizado
+
+### 🎯 **Atajos de Teclado**
+
+✅ **Ctrl+Shift+?** - Mostrar todos los atajos
+✅ **Atajos completos** - Ejecutar, editar, buscar, navegar
+✅ **Overlay interactivo** - Ayuda visual de atajos
+✅ **Compatibilidad VS Code** - Mismos atajos que VS Code
+
+### 📊 **Barra de Estado Profesional**
+
+✅ **Estado de Python** - Indicador visual del estado
+✅ **Tiempo de ejecución** - Métricas de performance
+✅ **Estadísticas de código** - Líneas, caracteres, funciones, clases
+✅ **Información del sistema** - Python 3.11, Pyodide 0.26.2
+
+### ❓ **Centro de Ayuda**
+
+✅ **Documentación integrada** - Todo lo que necesitas saber
+✅ **Tutoriales paso a paso** - Aprende rápidamente
+✅ **FAQs** - Respuestas a preguntas frecuentes
+✅ **Tips útiles** - Trucos y mejores prácticas
+
 ### 🧪 **Testing Integrado**
-✅ **Unittest framework** - Tests unitarios completos  
-✅ **Resultados visuales** - Interfaz clara de resultados  
+
+✅ **Unittest framework** - Tests unitarios completos
+✅ **Resultados visuales** - Interfaz clara de resultados
 ✅ **Cobertura de tests** - Estadísticas detalladas
 
 ### 🔒 **Seguridad**
-✅ **Validación de código** - Previene código malicioso  
-✅ **Timeouts** - Protección contra loops infinitos  
-✅ **Sandboxing** - Ejecución aislada  
+
+✅ **Validación de código** - Previene código malicioso
+✅ **Timeouts** - Protección contra loops infinitos
+✅ **Sandboxing** - Ejecución aislada
 ✅ **Sanitización** - Limpieza de salidas
+
+### 📱 **Progressive Web App (PWA)**
+
+✅ **Instalable** - Funciona como app nativa
+✅ **Offline capable** - Trabaja sin conexión
+✅ **Manifest completo** - PWA optimizada
+✅ **Shortcuts** - Accesos directos del sistema
 
 ## 🛠️ Tecnologías
 
 - **React 18.3** - Biblioteca UI moderna y eficiente
 - **Vite 5.4** - Build tool ultrarrápido
-- **Monaco Editor** - Editor de código profesional (VS Code)
+- **Monaco Editor 0.45** - Editor de código profesional (VS Code)
 - **Pyodide 0.26** - Python 3.11 en WebAssembly
 - **Matplotlib** - Visualización de datos científicos
 - **NumPy** - Computación numérica
@@ -102,29 +169,69 @@ npm run build
 
 # Vista previa del build
 npm run preview
+
+# Deploy a GitHub Pages
+npm run deploy
 ```
+
+### 🌐 Deploy en GitHub Pages
+
+**El proyecto está 100% listo para GitHub Pages!**
+
+#### Método 1: Automático con GitHub Actions ⚡
+
+1. Push a `main` → Deploy automático
+2. Tu sitio estará en: `https://TU-USUARIO.github.io/pyhub-ide/`
+
+#### Método 2: Manual
+
+```bash
+npm run deploy
+```
+
+**📚 Ver guía completa**: [DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)
+
+---
+
+## 📁 Estructura del Proyecto
+
+```
+pyhub-ide/
+├── .github/workflows/deploy.yml  # GitHub Actions
+├── public/examples/              # 12 ejemplos Python
+├── src/components/               # 15 componentes React
+├── .nojekyll                     # GitHub Pages config
+├── vite.config.js               # Optimizado para deploy
+└── DEPLOYMENT_GUIDE.md          # Guía completa
+```
+
+---
 
 ## 🎯 Uso
 
 ### Editor de Código
+
 - Escribe tu código Python en el editor Monaco
 - **Ctrl+Enter** o clic en "Ejecutar" para correr el código
 - El output aparece en el panel derecho
 - Soporte completo de sintaxis y autocompletado
 
 ### Terminal REPL
+
 - Haz clic en "💻 Terminal" para abrir el REPL
 - Escribe comandos Python interactivos
 - Usa ↑/↓ para navegar el historial
 - **Ctrl+L** para limpiar la terminal
 
 ### Galería de Ejemplos
+
 - Haz clic en "📚 Ejemplos"
 - Explora 8 categorías con ejemplos profesionales
 - Busca por nombre o descripción
 - Carga cualquier ejemplo con un clic
 
 ### Visualización de Datos
+
 ```python
 import matplotlib.pyplot as plt
 import numpy as np
@@ -138,22 +245,26 @@ plt.show()
 ```
 
 ### Compartir Código
+
 - Clic en "🔗 Compartir"
 - Genera URL con código incluido
 - Descarga como archivo .py
 - Comparte en redes sociales
 
 ### Personalización
+
 - Clic en "⚙️ Ajustes"
 - Cambia tema, fuente, y más
 - Auto-guardado opcional
 - Configuración persistente
+
 2. Haz clic en **"▶️ Ejecutar"** o presiona `Ctrl+Enter`
 3. La salida aparecerá en el panel derecho
 
 ### Ejecutar Tests
 
 1. Define funciones que empiecen con `test_`:
+
    ```python
    def test_suma():
        assert 2 + 2 == 4
@@ -166,6 +277,7 @@ plt.show()
 ### Cargar Ejemplos
 
 Usa el menú desplegable **"📚 Ejemplos..."** para cargar código de ejemplo:
+
 - Hola Mundo - Introducción básica
 - Fibonacci - Algoritmos y recursión
 - Tests Unitarios - Ejemplo de testing
@@ -230,6 +342,7 @@ def test_suma():
 ### Ejecutar Tests
 
 Haz clic en el botón **"🧪 Tests"**. El runner:
+
 1. Descubre todas las funciones que empiecen con `test_`
 2. Ejecuta cada test
 3. Captura aserciones fallidas y excepciones

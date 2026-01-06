@@ -1,0 +1,20 @@
+{
+  "recommendations": [
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "bradlc.vscode-tailwindcss",
+    "dsznajder.es7-react-js-snippets",
+    "formulahendry.auto-rename-tag",
+    "christian-kohler.path-intellisense",
+    "zignd.html-css-class-completion",
+    "ms-vscode.vscode-typescript-next",
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "ritwickdey.LiveServer",
+    "PKief.material-icon-theme",
+    "naumovs.color-highlight",
+    "streetsidesoftware.code-spell-checker",
+    "wayou.vscode-todo-highlight",
+    "eamodio.gitlens"
+  ]
+}
