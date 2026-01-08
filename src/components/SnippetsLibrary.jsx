@@ -15,7 +15,7 @@ function SnippetsLibrary({ onInsertSnippet }) {
       id: "func",
       name: "Función básica",
       category: "basico",
-      icon: "📦",
+      icon: "fa-cube",
       description: "Función con docstring",
       code: `def mi_funcion(parametro):
     """Descripción de la función."""
@@ -25,7 +25,7 @@ function SnippetsLibrary({ onInsertSnippet }) {
       id: "class",
       name: "Clase básica",
       category: "basico",
-      icon: "🏗️",
+      icon: "fa-object-group",
       description: "Clase con constructor",
       code: `class MiClase:
     """Clase de ejemplo."""
@@ -40,7 +40,7 @@ function SnippetsLibrary({ onInsertSnippet }) {
       id: "list_comp",
       name: "List Comprehension",
       category: "basico",
-      icon: "📋",
+      icon: "fa-list",
       description: "Comprensión de listas",
       code: `resultado = [x * 2 for x in range(10) if x % 2 == 0]`,
     },
@@ -49,7 +49,7 @@ function SnippetsLibrary({ onInsertSnippet }) {
       id: "plot_line",
       name: "Gráfico de líneas",
       category: "visualizacion",
-      icon: "📈",
+      icon: "fa-chart-line",
       description: "Plot básico con matplotlib",
       code: `import matplotlib.pyplot as plt
 import numpy as np
@@ -69,7 +69,7 @@ plt.show()`,
       id: "plot_scatter",
       name: "Gráfico de dispersión",
       category: "visualizacion",
-      icon: "⚫",
+      icon: "fa-braille",
       description: "Scatter plot con matplotlib",
       code: `import matplotlib.pyplot as plt
 import numpy as np
@@ -91,7 +91,7 @@ plt.show()`,
       id: "binary_search",
       name: "Búsqueda Binaria",
       category: "algoritmos",
-      icon: "🔍",
+      icon: "fa-search",
       description: "Algoritmo de búsqueda binaria",
       code: `def busqueda_binaria(arr, target):
     """Busca un elemento en un array ordenado."""
@@ -112,7 +112,7 @@ plt.show()`,
       id: "quick_sort",
       name: "Quick Sort",
       category: "algoritmos",
-      icon: "⚡",
+      icon: "fa-bolt",
       description: "Algoritmo de ordenamiento rápido",
       code: `def quick_sort(arr):
     """Ordena un array usando Quick Sort."""
@@ -131,7 +131,7 @@ plt.show()`,
       id: "linked_list",
       name: "Lista Enlazada",
       category: "estructuras",
-      icon: "🔗",
+      icon: "fa-link",
       description: "Implementación de lista enlazada",
       code: `class Nodo:
     def __init__(self, dato):
@@ -156,7 +156,7 @@ class ListaEnlazada:
       id: "stack",
       name: "Pila (Stack)",
       category: "estructuras",
-      icon: "📚",
+      icon: "fa-layer-group",
       description: "Implementación de pila",
       code: `class Pila:
     def __init__(self):
@@ -184,7 +184,7 @@ class ListaEnlazada:
       id: "unittest",
       name: "Test Unitario",
       category: "testing",
-      icon: "🧪",
+      icon: "fa-flask",
       description: "Template de unittest",
       code: `import unittest
 
@@ -216,7 +216,7 @@ if __name__ == '__main__':
       id: "timer_decorator",
       name: "Decorador Timer",
       category: "avanzado",
-      icon: "⏱️",
+      icon: "fa-stopwatch",
       description: "Decorador para medir tiempo",
       code: `import time
 from functools import wraps
@@ -241,7 +241,7 @@ def mi_funcion():
       id: "retry_decorator",
       name: "Decorador Retry",
       category: "avanzado",
-      icon: "🔄",
+      icon: "fa-redo",
       description: "Decorador para reintentos",
       code: `from functools import wraps
 import time
@@ -265,13 +265,13 @@ def retry(max_attempts=3, delay=1):
   ];
 
   const categories = [
-    { id: "all", name: "Todos", icon: "📚" },
-    { id: "basico", name: "Básicos", icon: "🌱" },
-    { id: "visualizacion", name: "Visualización", icon: "📊" },
-    { id: "algoritmos", name: "Algoritmos", icon: "🧮" },
-    { id: "estructuras", name: "Estructuras", icon: "🏗️" },
-    { id: "testing", name: "Testing", icon: "🧪" },
-    { id: "avanzado", name: "Avanzado", icon: "🚀" },
+    { id: "all", name: "Todos", icon: "fa-th" },
+    { id: "basico", name: "Básicos", icon: "fa-seedling" },
+    { id: "visualizacion", name: "Visualización", icon: "fa-chart-bar" },
+    { id: "algoritmos", name: "Algoritmos", icon: "fa-code" },
+    { id: "estructuras", name: "Estructuras", icon: "fa-project-diagram" },
+    { id: "testing", name: "Testing", icon: "fa-flask" },
+    { id: "avanzado", name: "Avanzado", icon: "fa-rocket" },
   ];
 
   const filteredSnippets = snippets.filter((snippet) => {
@@ -300,7 +300,7 @@ def retry(max_attempts=3, delay=1):
                    flex items-center gap-2 font-medium shadow-lg hover:shadow-xl"
         title="Biblioteca de Snippets"
       >
-        <span>✨</span>
+        <i className="fas fa-magic"></i>
         <span>Snippets</span>
       </button>
     );
@@ -313,8 +313,8 @@ def retry(max_attempts=3, delay=1):
         <div className="bg-gradient-to-r from-orange-600 to-amber-600 p-6 text-white">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2">
-                ✨ Biblioteca de Snippets
+              <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
+                <i className="fas fa-magic"></i> Biblioteca de Snippets
               </h2>
               <p className="text-orange-100 text-sm">
                 Plantillas de código listas para usar
@@ -382,7 +382,7 @@ def retry(max_attempts=3, delay=1):
                       : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
               >
-                <span>{category.icon}</span>
+                <i className={`fas ${category.icon}`}></i>
                 <span>{category.name}</span>
               </button>
             ))}
@@ -401,7 +401,9 @@ def retry(max_attempts=3, delay=1):
                 <div className="p-4">
                   <div className="flex items-start justify-between mb-3">
                     <div className="flex items-center gap-3">
-                      <span className="text-3xl">{snippet.icon}</span>
+                      <span className="text-3xl text-orange-400">
+                        <i className={`fas ${snippet.icon}`}></i>
+                      </span>
                       <div>
                         <h3 className="text-white font-bold">{snippet.name}</h3>
                         <p className="text-gray-400 text-sm">

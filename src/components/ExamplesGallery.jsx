@@ -14,7 +14,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Hola Mundo",
       file: "hello_world.py",
       category: "basico",
-      icon: "👋",
+      icon: "fa-hand",
       description:
         "Tu primer programa Python con variables, funciones y bucles",
       difficulty: "Principiante",
@@ -24,7 +24,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Fibonacci",
       file: "fibonacci.py",
       category: "basico",
-      icon: "🔢",
+      icon: "fa-calculator",
       description: "Secuencia de Fibonacci con métodos iterativo y recursivo",
       difficulty: "Principiante",
       time: "5 min",
@@ -33,7 +33,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Tests Unitarios",
       file: "tests_example.py",
       category: "testing",
-      icon: "🧪",
+      icon: "fa-flask",
       description: "Ejemplos de testing con unittest framework",
       difficulty: "Intermedio",
       time: "5 min",
@@ -42,7 +42,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Visualización de Datos",
       file: "data_visualization.py",
       category: "datascience",
-      icon: "📊",
+      icon: "fa-chart-bar",
       description:
         "Gráficos impresionantes con matplotlib: líneas, barras, dispersión y más",
       difficulty: "Intermedio",
@@ -52,7 +52,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Arte y Animaciones",
       file: "animations.py",
       category: "visual",
-      icon: "🎨",
+      icon: "fa-palette",
       description:
         "Arte generativo: espirales de Fibonacci, fractales de Mandelbrot y patrones",
       difficulty: "Avanzado",
@@ -62,7 +62,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Algoritmos Clásicos",
       file: "algorithms.py",
       category: "algoritmos",
-      icon: "🧮",
+      icon: "fa-code",
       description:
         "Algoritmos de ordenamiento, búsqueda, Dijkstra y Torres de Hanoi",
       difficulty: "Intermedio",
@@ -72,7 +72,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Machine Learning",
       file: "machine_learning.py",
       category: "ml",
-      icon: "🤖",
+      icon: "fa-robot",
       description:
         "ML desde cero: regresión, clustering, redes neuronales y KNN",
       difficulty: "Avanzado",
@@ -82,7 +82,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Juegos Interactivos",
       file: "games.py",
       category: "juegos",
-      icon: "🎮",
+      icon: "fa-gamepad",
       description:
         "Juegos clásicos: Game of Life, Sudoku, laberintos y Tic-Tac-Toe AI",
       difficulty: "Avanzado",
@@ -92,7 +92,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Criptografía",
       file: "cryptography.py",
       category: "seguridad",
-      icon: "🔐",
+      icon: "fa-lock",
       description:
         "Hashing, cifrado César, XOR, generador de contraseñas y más",
       difficulty: "Intermedio",
@@ -102,7 +102,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Web Scraping y APIs",
       file: "web_scraping.py",
       category: "web",
-      icon: "🌐",
+      icon: "fa-globe",
       description:
         "Extracción de datos, parseo HTML, APIs REST y procesamiento JSON",
       difficulty: "Avanzado",
@@ -112,7 +112,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Web Automation",
       file: "web_automation.py",
       category: "web",
-      icon: "🤖",
+      icon: "fa-cogs",
       description:
         "Automatización web avanzada: login, formularios, paginación y screenshots",
       difficulty: "Avanzado",
@@ -122,7 +122,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
       name: "Estructuras de Datos Avanzadas",
       file: "data_structures_advanced.py",
       category: "algoritmos",
-      icon: "🏗️",
+      icon: "fa-project-diagram",
       description: "Trie, Union-Find, Segment Tree, LRU Cache y Skip List",
       difficulty: "Avanzado",
       time: "12 min",
@@ -130,59 +130,59 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
   ];
 
   const categories = [
-    { id: "all", name: "Todos", icon: "📚", count: examples.length },
+    { id: "all", name: "Todos", icon: "fa-th", count: examples.length },
     {
       id: "basico",
       name: "Básico",
-      icon: "🌱",
+      icon: "fa-seedling",
       count: examples.filter((e) => e.category === "basico").length,
     },
     {
       id: "datascience",
       name: "Data Science",
-      icon: "📊",
+      icon: "fa-chart-line",
       count: examples.filter((e) => e.category === "datascience").length,
     },
     {
       id: "visual",
       name: "Visual",
-      icon: "🎨",
+      icon: "fa-image",
       count: examples.filter((e) => e.category === "visual").length,
     },
     {
       id: "algoritmos",
       name: "Algoritmos",
-      icon: "🧮",
+      icon: "fa-code",
       count: examples.filter((e) => e.category === "algoritmos").length,
     },
     {
       id: "ml",
       name: "Machine Learning",
-      icon: "🤖",
+      icon: "fa-robot",
       count: examples.filter((e) => e.category === "ml").length,
     },
     {
       id: "juegos",
       name: "Juegos",
-      icon: "🎮",
+      icon: "fa-gamepad",
       count: examples.filter((e) => e.category === "juegos").length,
     },
     {
       id: "testing",
       name: "Testing",
-      icon: "🧪",
+      icon: "fa-flask",
       count: examples.filter((e) => e.category === "testing").length,
     },
     {
       id: "seguridad",
       name: "Seguridad",
-      icon: "🔐",
+      icon: "fa-shield-alt",
       count: examples.filter((e) => e.category === "seguridad").length,
     },
     {
       id: "web",
       name: "Web",
-      icon: "🌐",
+      icon: "fa-globe",
       count: examples.filter((e) => e.category === "web").length,
     },
   ];
@@ -224,7 +224,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
                    flex items-center gap-2 font-medium shadow-lg hover:shadow-xl disabled:opacity-50"
         title="Abrir galería de ejemplos"
       >
-        <span>📚</span>
+        <i className="fas fa-book"></i>
         <span>Ejemplos</span>
       </button>
     );
@@ -237,8 +237,8 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
         <div className="bg-gradient-to-r from-purple-600 to-indigo-600 p-6 text-white">
           <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-3xl font-bold mb-2">
-                📚 Galería de Ejemplos
+              <h2 className="text-3xl font-bold mb-2 flex items-center gap-3">
+                <i className="fas fa-book"></i> Galería de Ejemplos
               </h2>
               <p className="text-purple-100 text-sm">
                 Explora {examples.length} ejemplos interactivos de Python
@@ -306,7 +306,7 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
                       : "bg-gray-700 text-gray-300 hover:bg-gray-600"
                   }`}
               >
-                <span>{category.icon}</span>
+                <i className={`fas ${category.icon}`}></i>
                 <span>{category.name}</span>
                 <span className="text-xs bg-white bg-opacity-20 px-2 py-0.5 rounded-full">
                   {category.count}
@@ -347,7 +347,9 @@ function ExamplesGallery({ onLoadExample, isRunning }) {
                   {/* Card Header */}
                   <div className="bg-gradient-to-br from-purple-600 to-indigo-600 p-4">
                     <div className="flex items-start justify-between">
-                      <div className="text-4xl mb-2">{example.icon}</div>
+                      <div className="text-4xl mb-2">
+                        <i className={`fas ${example.icon} text-white`}></i>
+                      </div>
                       <div
                         className={`${getDifficultyColor(
                           example.difficulty

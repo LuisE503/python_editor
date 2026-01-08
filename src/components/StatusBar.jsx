@@ -33,9 +33,9 @@ export default function StatusBar({
   };
 
   const getStatusText = () => {
-    if (!pyodideReady) return "🟡 Inicializando Python...";
-    if (isRunning) return "🔵 Ejecutando código...";
-    return "🟢 Listo";
+    if (!pyodideReady) return "Inicializando Python...";
+    if (isRunning) return "Ejecutando código...";
+    return "Listo";
   };
 
   return (
@@ -55,7 +55,7 @@ export default function StatusBar({
 
         {executionTime && (
           <div className="flex items-center gap-1 text-gray-400">
-            <span>⏱️</span>
+            <i className="fas fa-stopwatch"></i>
             <span>{executionTime}ms</span>
           </div>
         )}

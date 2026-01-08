@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from "react";
 
 /**
  * Terminal REPL interactivo para Python
@@ -7,7 +7,7 @@ import React, { useState, useEffect, useRef } from 'react';
 function InteractiveREPL({ pyodideReady, onExecuteCode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [history, setHistory] = useState([]);
-  const [currentInput, setCurrentInput] = useState('');
+  const [currentInput, setCurrentInput] = useState("");
   const [commandHistory, setCommandHistory] = useState([]);
   const [historyIndex, setHistoryIndex] = useState(-1);
   const inputRef = useRef(null);
@@ -29,87 +29,106 @@ function InteractiveREPL({ pyodideReady, onExecuteCode }) {
     if (!command.trim()) return;
 
     // Añadir comando al historial
-    setHistory(prev => [...prev, { type: 'input', content: command }]);
-    setCommandHistory(prev => [...prev, command]);
+    setHistory((prev) => [...prev, { type: "input", content: command }]);
+    setCommandHistory((prev) => [...prev, command]);
     setHistoryIndex(-1);
-    setCurrentInput('');
+    setCurrentInput("");
 
     try {
       // Comandos especiales
-      if (command.trim() === 'clear') {
+      if (command.trim() === "clear") {
         setHistory([]);
         return;
       }
 
-      if (command.trim() === 'help') {
-        setHistory(prev => [...prev, {
-          type: 'output',
-          content: `Comandos disponibles:
+      if (command.trim() === "help") {
+        setHistory((prev) => [
+          ...prev,
+          {
+            type: "output",
+            content: `Comandos disponibles:
   clear     - Limpia la terminal
   help      - Muestra esta ayuda
   history   - Muestra historial de comandos
-  
+
 Ejecuta cualquier código Python:
   >>> 2 + 2
   >>> import math; math.pi
-  >>> [x**2 for x in range(10)]`
-        }]);
+  >>> [x**2 for x in range(10)]`,
+          },
+        ]);
         return;
       }
 
-      if (command.trim() === 'history') {
-        setHistory(prev => [...prev, {
-          type: 'output',
-          content: commandHistory.map((cmd, i) => `${i + 1}. ${cmd}`).join('\n')
-        }]);
+      if (command.trim() === "history") {
+        setHistory((prev) => [
+          ...prev,
+          {
+            type: "output",
+            content: commandHistory
+              .map((cmd, i) => `${i + 1}. ${cmd}`)
+              .join("\n"),
+          },
+        ]);
         return;
       }
 
       // Ejecutar código Python
       const result = await onExecuteCode(command);
-      
+
       if (result.success) {
-        let output = result.output || '';
-        if (result.result !== undefined && result.result !== null && result.result !== 'None') {
+        let output = result.output || "";
+        if (
+          result.result !== undefined &&
+          result.result !== null &&
+          result.result !== "None"
+        ) {
           output = result.result;
         }
         if (output) {
-          setHistory(prev => [...prev, { type: 'output', content: output }]);
+          setHistory((prev) => [...prev, { type: "output", content: output }]);
         }
       } else {
-        setHistory(prev => [...prev, { type: 'error', content: result.error || result.output }]);
+        setHistory((prev) => [
+          ...prev,
+          { type: "error", content: result.error || result.output },
+        ]);
       }
     } catch (error) {
-      setHistory(prev => [...prev, { type: 'error', content: error.message }]);
+      setHistory((prev) => [
+        ...prev,
+        { type: "error", content: error.message },
+      ]);
     }
   };
 
   const handleKeyDown = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
+    if (e.key === "Enter" && !e.shiftKey) {
       e.preventDefault();
       executeCommand(currentInput);
-    } else if (e.key === 'ArrowUp') {
+    } else if (e.key === "ArrowUp") {
       e.preventDefault();
       if (commandHistory.length > 0) {
-        const newIndex = historyIndex === -1 
-          ? commandHistory.length - 1 
-          : Math.max(0, historyIndex - 1);
+        const newIndex =
+          historyIndex === -1
+            ? commandHistory.length - 1
+            : Math.max(0, historyIndex - 1);
         setHistoryIndex(newIndex);
         setCurrentInput(commandHistory[newIndex]);
       }
-    } else if (e.key === 'ArrowDown') {
+    } else if (e.key === "ArrowDown") {
       e.preventDefault();
       if (historyIndex !== -1) {
         const newIndex = historyIndex + 1;
         if (newIndex >= commandHistory.length) {
           setHistoryIndex(-1);
-          setCurrentInput('');
+          setCurrentInput("");
         } else {
           setHistoryIndex(newIndex);
           setCurrentInput(commandHistory[newIndex]);
         }
       }
-    } else if (e.key === 'l' && e.ctrlKey) {
+    } else if (e.key === "l" && e.ctrlKey) {
       e.preventDefault();
       setHistory([]);
     }
@@ -120,12 +139,12 @@ Ejecuta cualquier código Python:
       <button
         onClick={() => setIsOpen(true)}
         disabled={!pyodideReady}
-        className="px-4 py-2 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg 
-                   hover:from-green-700 hover:to-teal-700 transition-all duration-200 
+        className="px-4 py-2 bg-gradient-to-r from-green-600 to-teal-600 text-white rounded-lg
+                   hover:from-green-700 hover:to-teal-700 transition-all duration-200
                    flex items-center gap-2 font-medium shadow-lg hover:shadow-xl disabled:opacity-50"
         title="Abrir terminal REPL"
       >
-        <span>💻</span>
+        <i className="fas fa-terminal"></i>
         <span>Terminal</span>
       </button>
     );
@@ -143,7 +162,9 @@ Ejecuta cualquier código Python:
               <div className="w-3 h-3 rounded-full bg-green-500"></div>
             </div>
             <div>
-              <h3 className="text-xl font-bold">💻 Python REPL</h3>
+              <h3 className="text-xl font-bold">
+                <i className="fas fa-terminal"></i> Python REPL
+              </h3>
               <p className="text-xs text-green-100">Terminal Interactivo</p>
             </div>
           </div>
@@ -160,8 +181,18 @@ Ejecuta cualquier código Python:
               className="hover:bg-white hover:bg-opacity-20 rounded-full p-2 transition-all"
               title="Cerrar"
             >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              <svg
+                className="w-5 h-5"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
               </svg>
             </button>
           </div>
@@ -187,12 +218,14 @@ Ejecuta cualquier código Python:
           {/* Command History */}
           {history.map((entry, index) => (
             <div key={index} className="mb-2">
-              {entry.type === 'input' ? (
+              {entry.type === "input" ? (
                 <div className="flex gap-2">
-                  <span className="text-green-400 font-bold">{'>>>'}</span>
-                  <span className="text-white flex-1 break-all">{entry.content}</span>
+                  <span className="text-green-400 font-bold">{">>>"}</span>
+                  <span className="text-white flex-1 break-all">
+                    {entry.content}
+                  </span>
                 </div>
-              ) : entry.type === 'error' ? (
+              ) : entry.type === "error" ? (
                 <div className="text-red-400 pl-6 whitespace-pre-wrap break-all">
                   {entry.content}
                 </div>
@@ -206,7 +239,7 @@ Ejecuta cualquier código Python:
 
           {/* Current Input */}
           <div className="flex gap-2 items-start">
-            <span className="text-green-400 font-bold pt-0.5">{'>>>'}</span>
+            <span className="text-green-400 font-bold pt-0.5">{">>>"}</span>
             <textarea
               ref={inputRef}
               value={currentInput}
@@ -215,14 +248,14 @@ Ejecuta cualquier código Python:
               className="flex-1 bg-transparent text-white outline-none resize-none border-none"
               placeholder="Escribe código Python..."
               rows={1}
-              style={{ 
-                minHeight: '1.5rem',
-                maxHeight: '10rem',
-                overflow: 'auto'
+              style={{
+                minHeight: "1.5rem",
+                maxHeight: "10rem",
+                overflow: "auto",
               }}
               onInput={(e) => {
-                e.target.style.height = 'auto';
-                e.target.style.height = e.target.scrollHeight + 'px';
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
               }}
             />
           </div>
@@ -234,10 +267,19 @@ Ejecuta cualquier código Python:
         {/* Footer with Tips */}
         <div className="bg-gray-800 px-4 py-2 text-xs text-gray-400 border-t border-gray-700">
           <div className="flex flex-wrap gap-4">
-            <span>💡 <strong>Enter:</strong> Ejecutar</span>
-            <span>💡 <strong>↑/↓:</strong> Historial</span>
-            <span>💡 <strong>Ctrl+L:</strong> Limpiar</span>
-            <span>💡 Tip: Prueba con <code className="bg-gray-900 px-1 rounded">import this</code></span>
+            <span>
+              💡 <strong>Enter:</strong> Ejecutar
+            </span>
+            <span>
+              💡 <strong>↑/↓:</strong> Historial
+            </span>
+            <span>
+              💡 <strong>Ctrl+L:</strong> Limpiar
+            </span>
+            <span>
+              💡 Tip: Prueba con{" "}
+              <code className="bg-gray-900 px-1 rounded">import this</code>
+            </span>
           </div>
         </div>
       </div>

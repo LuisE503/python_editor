@@ -93,7 +93,7 @@ function App() {
           setLoadingMessage(message);
         });
         setPyodideReady(true);
-        setOutput("✨ Python listo. ¡Explora los ejemplos en la galería! 📚\n");
+        setOutput("✓ Python listo. ¡Explora los ejemplos en la galería!\n");
       } catch (error) {
         setOutput(
           `❌ Error al inicializar Pyodide:\n${error.message}\n\nRecarga la página para intentar de nuevo.`
@@ -141,7 +141,7 @@ function App() {
 
     setIsRunning(true);
     setTestResults(null);
-    setOutput("🔄 Ejecutando...\n");
+    setOutput("⏳ Ejecutando...\n");
 
     const startTime = performance.now();
 
@@ -241,7 +241,7 @@ function App() {
 
   const handleReset = async () => {
     setIsRunning(true);
-    setOutput("🔄 Reiniciando entorno...\n");
+    setOutput("⏳ Reiniciando entorno...\n");
     setTestResults(null);
 
     try {
@@ -262,12 +262,12 @@ function App() {
     if (!filename) return;
 
     try {
-      const response = await fetch(`/examples/${filename}`);
+      const response = await fetch(`./examples/${filename}`);
       if (response.ok) {
         const exampleCode = await response.text();
         setCode(exampleCode);
         setOutput(
-          `📚 Ejemplo cargado: ${filename}\n✨ Presiona Ejecutar o Ctrl+Enter para ver el resultado\n`
+          `✓ Ejemplo cargado: ${filename}\n➡ Presiona Ejecutar o Ctrl+Enter para ver el resultado\n`
         );
         setTestResults(null);
       } else {
@@ -348,8 +348,8 @@ function App() {
 
       <header className="app-header" role="banner">
         <div className="app-title">
-          <span className="icon" aria-hidden="true">
-            🐍
+          <span className="icon text-blue-400" aria-hidden="true">
+            <i className="fab fa-python"></i>
           </span>
           <h1 className="font-bold text-xl">PyHub IDE</h1>
           <span
@@ -386,7 +386,17 @@ function App() {
               aria-hidden="true"
             ></span>
             <span className="text-sm hidden md:inline">
-              {pyodideReady ? "🟢 Python listo" : "🟡 Cargando..."}
+              {pyodideReady ? (
+                <>
+                  <i className="fas fa-check-circle text-green-400"></i> Python
+                  listo
+                </>
+              ) : (
+                <>
+                  <i className="fas fa-circle-notch fa-spin text-yellow-400"></i>{" "}
+                  Cargando...
+                </>
+              )}
             </span>
           </div>
         </div>

@@ -17,10 +17,10 @@ function Toast({ message, type = "info", duration = 3000, onClose }) {
   }, [duration, onClose]);
 
   const icons = {
-    success: "✅",
-    error: "❌",
-    warning: "⚠️",
-    info: "ℹ️",
+    success: <i className="fas fa-check-circle"></i>,
+    error: <i className="fas fa-times-circle"></i>,
+    warning: <i className="fas fa-exclamation-triangle"></i>,
+    info: <i className="fas fa-info-circle"></i>,
   };
 
   const colors = {

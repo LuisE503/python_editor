@@ -21,7 +21,7 @@ function CommandPalette({
     {
       id: "run",
       name: "Ejecutar Código",
-      icon: "▶️",
+      icon: "fa-play",
       shortcut: "Ctrl+Enter",
       action: () => {
         onRunCode();
@@ -32,7 +32,7 @@ function CommandPalette({
     {
       id: "tests",
       name: "Ejecutar Tests",
-      icon: "🧪",
+      icon: "fa-flask",
       shortcut: "Ctrl+Shift+T",
       action: () => {
         onRunTests();
@@ -43,7 +43,7 @@ function CommandPalette({
     {
       id: "examples",
       name: "Abrir Galería de Ejemplos",
-      icon: "📚",
+      icon: "fa-book",
       shortcut: "Ctrl+E",
       action: () => {
         onOpenExamples();
@@ -54,7 +54,7 @@ function CommandPalette({
     {
       id: "repl",
       name: "Abrir Terminal REPL",
-      icon: "💻",
+      icon: "fa-terminal",
       shortcut: "Ctrl+`",
       action: () => {
         onOpenREPL();
@@ -65,7 +65,7 @@ function CommandPalette({
     {
       id: "settings",
       name: "Configuración",
-      icon: "⚙️",
+      icon: "fa-cog",
       shortcut: "Ctrl+,",
       action: () => {
         onOpenSettings();
@@ -76,7 +76,7 @@ function CommandPalette({
     {
       id: "share",
       name: "Compartir Código",
-      icon: "🔗",
+      icon: "fa-share-alt",
       shortcut: "Ctrl+Shift+S",
       action: () => {
         onOpenShare();
@@ -87,7 +87,7 @@ function CommandPalette({
     {
       id: "analyzer",
       name: "Analizar Código",
-      icon: "📊",
+      icon: "fa-chart-bar",
       shortcut: "Ctrl+Shift+A",
       action: () => {
         onOpenAnalyzer();
@@ -98,7 +98,7 @@ function CommandPalette({
     {
       id: "clear",
       name: "Limpiar Salida",
-      icon: "🗑️",
+      icon: "fa-trash",
       shortcut: "Ctrl+L",
       action: () => {
         onClearOutput();
@@ -204,7 +204,9 @@ function CommandPalette({
                     className="w-full flex items-center gap-3 px-3 py-3 hover:bg-gray-800 rounded-lg
                              transition-all group"
                   >
-                    <span className="text-2xl">{cmd.icon}</span>
+                    <span className="text-2xl text-purple-400">
+                      <i className={`fas ${cmd.icon}`}></i>
+                    </span>
                     <div className="flex-1 text-left">
                       <div className="text-white font-medium">{cmd.name}</div>
                     </div>
