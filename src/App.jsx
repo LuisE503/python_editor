@@ -56,6 +56,11 @@ const EXAMPLES = [
   { name: "Juegos Interactivos", file: "games.py" },
   { name: "Criptografía", file: "cryptography.py" },
   { name: "Web Scraping y APIs", file: "web_scraping.py" },
+  { name: "Web Automation", file: "web_automation.py" },
+  {
+    name: "Estructuras de Datos Avanzadas",
+    file: "data_structures_advanced.py",
+  },
 ];
 
 function App() {
